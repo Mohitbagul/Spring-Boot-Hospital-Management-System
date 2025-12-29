@@ -1,0 +1,11 @@
+Any table can have more than one relationships with another table
+
+It is compulsory to define the relationship between any two tables in the entites.
+
+Eager v/s Lazy Loading
+@Transactional Annotation
+Different storage states
+
+
+CascadeType.Remove -> removes child only when parent is deleted
+orphanRemovel = true -> Deletes child entites when they are no longer referenced by the parent, so child will be removed even when the parent is present in the db

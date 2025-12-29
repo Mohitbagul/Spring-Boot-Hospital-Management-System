@@ -44,10 +44,10 @@ public class PatientRepositoryTest {
     @Test
     @DisplayName("Test finding patient by ID")
     void testFindById() {
-        Page<Patient> patientList = patientRepository.findAllPatients(
-                PageRequest.of(0, 2, Sort.by("name")));
+        // Page<Patient> patientList = patientRepository.findAllPatients(
+        //         PageRequest.of(0, 2, Sort.by("name")));
 
-        patientList.getContent().forEach(System.out::println);
+        // patientList.getContent().forEach(System.out::println);
 
         // List<Patient> patientList =
         // patientRepository.findByBirthDateOrEmail(LocalDate.of(2003,7,29),"mohitmbagul@gmail.com");
@@ -78,6 +78,12 @@ public class PatientRepositoryTest {
         //
         // System.out.println(patientList);
 
+
+        List<Patient> patients = patientRepository.findAll();
+
+        for(Patient p:patients){
+            System.out.println(p);
+        }
     }
 
     @Test

@@ -1,18 +1,25 @@
 package com.mohit.demo.hospitalManagement.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.mohit.demo.hospitalManagement.Entity.type.BloodGroup;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +37,7 @@ import lombok.ToString;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable =  false, length = 40)
     private String name;
@@ -52,4 +59,11 @@ public class Patient {
     @Column(nullable = false, length = 10)
     private BloodGroup bloodGroup;
 
+    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval = true)
+    @JoinColumn(name = "patient_insurance_id") //owning side
+    private Insurance insurance;
+
+    @OneToMany(mappedBy="patient",cascade = CascadeType.REMOVE ,orphanRemoval = true)
+  
+    private List<Appointment> appointment = new ArrayList<>();
 }
